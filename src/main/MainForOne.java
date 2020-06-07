@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 
 import boogieamp.Boogieamp;
+import boogieamp.TemplateArray;
 import util.Util;
 
 public class MainForOne {
@@ -44,7 +45,18 @@ public class MainForOne {
 			//examples += "#"+f+"\n";
 			examples += code;
 			examples += "T = ";
-			examples += program.generateTemplateArray();
+			ArrayList<TemplateArray> array = program.generateTemplateArray();
+			examples += "[\n";
+			int i = 0;
+			for(TemplateArray a : array) {
+				if(i < array.size() - 1) {
+					examples += a.toString() + ", \n";
+				} else {
+					examples += a.toString();
+				}
+				i++;
+			}
+			examples += "]\n";
 			Util.WriteToFile(info_file, ""+Util.PROGRAM_STATE_SAFE +" "+program.variables.size()+" "+Num+"\n", false);
 		}
 		catch(Exception e)

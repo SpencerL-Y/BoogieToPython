@@ -77,10 +77,24 @@ public class IfCodeBlock extends CodeBlock {
 	
 	
 	@Override
-	public void getTemplateArray(ArrayList<CfgExpression> arithList) {
-		this.then_block.getTemplateArray(arithList);
-		this.else_block.getTemplateArray(arithList);
-		Util.extractNonLogicExpressions(this.condition, arithList);
+	public void getTemplateArray(ArrayList<CfgExpression> expList, ArrayList<TemplateArray> templateArrayList, HashMap<CfgVariable, Integer> varIntMap) {
+
+		System.out.println("generate template if");
+		this.then_block.getTemplateArray(expList, templateArrayList, varIntMap);
+		this.else_block.getTemplateArray(expList, templateArrayList, varIntMap);
+		for(CfgVariable v : this.variables) {
+			TemplateArray a = new TemplateArray(varIntMap.values().size());
+			a.setVarNum(varIntMap.get(v), 1);
+			for(TemplateArray ar : templateArrayList) {
+				if(ar.equals(a)) {
+					continue;
+				}
+			}
+			templateArrayList.add(a);
+		}
+		Util.extractNonLogicExpressions(this.condition, expList);
+
+		System.out.println("generate template if end");
 	}
 
 

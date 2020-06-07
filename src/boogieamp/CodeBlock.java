@@ -27,5 +27,5 @@ public abstract class CodeBlock {
 	public abstract HashMap<CfgVariable,String> ToPythonCode(HashMap<CfgVariable,CfgExpression> substitute);
 	public abstract String GetPythonLoopCondition(HashMap<CfgVariable,CfgExpression> substitute);
 	public abstract String GetZ3LoopCondition(HashMap<CfgVariable,CfgExpression> substitute);
-	public abstract void getTemplateArray(ArrayList<CfgExpression> templateList);
+	public abstract void getTemplateArray(ArrayList<CfgExpression> expList, ArrayList<TemplateArray> templateArrayList, HashMap<CfgVariable, Integer> varIntMap);
 }

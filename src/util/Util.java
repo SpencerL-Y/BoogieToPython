@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+import boogie.controlflow.CfgVariable;
 import boogie.controlflow.expression.CfgArrayAccessExpression;
 import boogie.controlflow.expression.CfgArrayStoreExpression;
 import boogie.controlflow.expression.CfgBinaryExpression;
@@ -32,6 +33,8 @@ import boogie.controlflow.expression.CfgWildcardExpression;
 import boogie.enums.BinaryOperator;
 import boogie.enums.UnaryOperator;
 import boogieamp.Boogieamp;
+import boogieamp.TemplateArray;
+import boogieamp.TemplateMatrix;
 
 public class Util {
 	public static String SOURCE_FILE_PATH = "ProgramFile/"; // Source file path
@@ -167,10 +170,6 @@ public class Util {
 			}
 		}
 	}
-	
-	public static void 
-	
-	
 	
 	public static String ExpressionToPythonString(CfgExpression exp)
 	{

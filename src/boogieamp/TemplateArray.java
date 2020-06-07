@@ -8,20 +8,36 @@ public class TemplateArray {
 	
 	public TemplateArray(int varNum) {
 		this.length = varNum + 1;
-		this.vec = new ArrayList<Integer>(this.length);
-		for(Integer i : this.vec) {
-			i = 0;
+		this.vec = new ArrayList<Integer>();
+		for(int i = 0; i < this.length; i++) {
+			this.vec.add(0);
 		}
 	}
 	
-	public void setVarNum(int varNum, int value) {
-		this.vec.set(varNum, value);
+	public void setVarNum(int pos, int value) {
+
+		
+		if(pos < this.length) {
+			this.vec.set(pos, value);
+		} else {
+			System.out.println("ERROR: TemplateArray index out of range");
+			return;
+		}
 	}
 	
-	public void printVec() {
+	public String toString() {
+		String result = "";
+		result += "[";
+		int index = 0;
 		for(Integer i : this.vec) {
-			System.out.print(i + " ");
+			if(index < this.length - 1) {
+				result += (i + ", ");
+			} else {
+				result += i;
+			}
+			index ++;
 		}
-		System.out.println();
+		result += "]";
+		return result;
 	}
 }

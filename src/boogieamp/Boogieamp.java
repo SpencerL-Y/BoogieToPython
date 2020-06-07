@@ -188,12 +188,20 @@ public class Boogieamp {
 	public ArrayList<TemplateArray> generateTemplateArray() {
 		ArrayList<TemplateArray> templateArray = new ArrayList<TemplateArray>();
 		ArrayList<CfgExpression> arithArray = new ArrayList<CfgExpression>();
-		this.root.getTemplateArray(arithArray);
-		ArrayList<CfgVariable> varList=  this.root.variables;
-		//TODO: add template parsing here
+		HashMap<CfgVariable, Integer> varIntMap = new HashMap<CfgVariable, Integer>();
 		int i = 0;
+		for(CfgVariable v : this.root.variables) {
+			varIntMap.put(v, i);
+			i ++;
+		}
+		this.root.getTemplateArray(arithArray, templateArray, varIntMap);
+		for(TemplateArray a : templateArray) {
+			System.out.println(a.toString());
+		}
+		i = 0;
 		for(CfgExpression e : arithArray) {
 			System.out.println(i + ": " + e.toString());
+			i++;
 		}
 		return templateArray;
 	}

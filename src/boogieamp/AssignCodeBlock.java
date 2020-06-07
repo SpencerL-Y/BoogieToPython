@@ -177,15 +177,36 @@ public class AssignCodeBlock extends CodeBlock {
 	}
 
 	@Override
-	public void getTemplateArray(ArrayList<CfgExpression> templateList) {
+	public void getTemplateArray(ArrayList<CfgExpression> expList, ArrayList<TemplateArray> templateArrayList, HashMap<CfgVariable, Integer> varIntMap) {
 		// TODO Auto-generated method stub
 		if(this.next == null) {
-			Util.extractNonLogicExpressions(this.condition, templateList);
+			Util.extractNonLogicExpressions(this.condition, expList);
+			for(CfgVariable v : this.variables) {
+				TemplateArray a = new TemplateArray(varIntMap.values().size());
+				a.setVarNum(varIntMap.get(v), 1);
+				for(TemplateArray ar : templateArrayList) {
+					if(ar.equals(a)) {
+						continue;
+					}
+				}
+				templateArrayList.add(a);
+			}
 		} else {
-			Util.extractNonLogicExpressions(this.condition, templateList);
-			this.next.getTemplateArray(templateList);
+			for(CfgVariable v : this.variables) {
+				TemplateArray a = new TemplateArray(varIntMap.values().size());
+				a.setVarNum(varIntMap.get(v), 1);
+				for(TemplateArray ar : templateArrayList) {
+					if(ar.equals(a)) {
+						continue;
+					}
+				}
+				templateArrayList.add(a);
+			}
+			Util.extractNonLogicExpressions(this.condition, expList);
+			this.next.getTemplateArray(expList, templateArrayList, varIntMap);
 		}
 	}
 
+	
 
 }
